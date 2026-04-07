@@ -17,39 +17,40 @@ def clr_scr():
     stellar.update(graphics)
     return None
 
-
-wdt = machine.WDT(timeout=5000)  # 5000 milliseconds = 5 seconds
-
-
-graphics.set_pen(graphics.create_pen(150, 50, 0))
-graphics.rectangle(3, 9, 4, 4)
-stellar.update(graphics)
-time.sleep(.6)
-clr_scr()
-
-
-def feed_watchdog(timer = 3000):
+def feed_watchdog(timer):
     wdt.feed()
-    print("Watchdog fed")
-
-
-#timer = machine.Timer()
-#timer.init(period=3000, mode=machine.Timer.PERIODIC, callback=feed_watchdog)
-
-# Main loop
-while True:
-    graphics.set_pen(graphics.create_pen(0, 150, 0))
-    graphics.rectangle(3, 9, 4, 4)
-    stellar.update(graphics)
-    time.sleep(0.6)
-    clr_scr()
-    time.sleep(0.6)
-    feed_watchdog()
+    print("nom nom")
     #--> try the wdt
     graphics.set_pen(graphics.create_pen(150, 0, 0))
     graphics.rectangle(3, 9, 4, 4)
     stellar.update(graphics)
     time.sleep(6)
+    #--> try the wdt
+
+
+wdt = machine.WDT(timeout=5000)
+
+graphics.set_pen(graphics.create_pen(100, 80, 10))
+graphics.rectangle(3, 9, 4, 4)
+stellar.update(graphics)
+time.sleep(.6)
+clr_scr()
+time.sleep(1)
+
+
+timer = machine.Timer()
+timer.init(period=3000, mode=machine.Timer.PERIODIC, callback=feed_watchdog)
+
+
+while True:
+    graphics.set_pen(graphics.create_pen(0, 150, 0))
+    graphics.rectangle(3, 9, 4, 4)
+    stellar.update(graphics)
+    time.sleep(0.7)
+    clr_scr()
+    time.sleep(0.6)
+
+
     
 
 
